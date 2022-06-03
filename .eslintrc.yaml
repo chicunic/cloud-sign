@@ -1,0 +1,16 @@
+env:
+  commonjs: true
+  es2021: true
+  node: true
+extends:
+  - airbnb-base
+parserOptions:
+  ecmaVersion: latest
+rules:
+  max-len: [2, { code: 160, ignoreComments: true, ignoreRegExpLiterals: true }]
+  no-await-in-loop: 0
+  no-console: 0
+  no-continue: 2
+  no-restricted-syntax: 0
+  no-underscore-dangle: 0
+  object-curly-newline: 0
