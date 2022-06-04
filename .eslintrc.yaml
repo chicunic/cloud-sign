@@ -8,6 +8,7 @@ parserOptions:
   ecmaVersion: latest
 rules:
   max-len: [2, { code: 160, ignoreComments: true, ignoreRegExpLiterals: true }]
+  func-names: 0
   no-await-in-loop: 0
   no-console: 0
   no-continue: 2

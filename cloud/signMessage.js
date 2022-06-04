@@ -1,13 +1,13 @@
 require('dotenv').config();
 const { utils } = require('ethers');
-const { GcpKmsSigner } = require('ethers-gcp-kms-signer');
+const CloudSigner = require('./CloudSigner');
 
-const wallet = new GcpKmsSigner({
+const wallet = new CloudSigner({
   projectId: process.env.PROJECT_ID,
   locationId: process.env.LOCATION_ID,
   keyRingId: process.env.KEY_RING_ID,
   keyId: process.env.KEY_ID,
-  keyVersion: process.env.VERSION_ID,
+  versionId: process.env.VERSION_ID,
 });
 
 const message = 'message';
