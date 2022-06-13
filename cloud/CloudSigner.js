@@ -44,8 +44,8 @@ const CloudSigner = class extends Signer {
       }
       delete tx.from;
     }
-    const signature = await this.signDigest(utils.keccak256(utils.serialize(tx)));
-    return utils.serialize(tx, signature);
+    const signature = await this.signDigest(utils.keccak256(utils.serializeTransaction(tx)));
+    return utils.serializeTransaction(tx, signature);
   }
 
   // edit from Wallet._signTypedData()
