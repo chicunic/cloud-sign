@@ -19,20 +19,20 @@ const types = {
     { name: 'tokenId', type: 'uint256' },
   ],
 };
-const unsigned = {
+const value = {
   tokenId: 1,
 };
 
 const main = async () => {
   const signed = signTypedData({
     privateKey: hexToBytes(process.env.PRIVATE_KEY),
-    data: { types, primaryType: 'Collection', domain, message: unsigned },
+    data: { types, primaryType: 'Collection', domain, message: value },
     version: 'V4',
   });
   console.log('signed', signed, signed.length);
 
   const address = toChecksumAddress(recoverTypedSignature({
-    data: { types, primaryType: 'Collection', domain, message: unsigned },
+    data: { types, primaryType: 'Collection', domain, message: value },
     signature: signed,
     version: 'V4',
   }));

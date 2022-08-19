@@ -1,11 +1,17 @@
 env:
   commonjs: true
   es2021: true
+  mocha: true
   node: true
 extends:
   - airbnb-base
 parserOptions:
   ecmaVersion: latest
+overrides:
+  - files: ["test/*.{j,t}s?(x)"]
+    rules:
+      func-names: 0
+      prefer-arrow-callback: 0
 rules:
   max-len: [2, { code: 160, ignoreComments: true, ignoreRegExpLiterals: true }]
   func-names: 0

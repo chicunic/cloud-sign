@@ -9,7 +9,7 @@ const main = async () => {
 
   const transaction = {
     nonce: 0, // web3.eth.getTransactionCount(account.address)
-    chainId: 43113, // web3.eth.net.getId()
+    chainId: 1, // web3.eth.net.getId()
     to: account.address,
     value: toWei('0.1', 'ether'),
     maxPriorityFeePerGas: toWei('1.5', 'gwei'), // provider.getFeeData()
@@ -20,7 +20,7 @@ const main = async () => {
   };
   console.log('unsigned', transaction);
 
-  const { rawTransaction: signed } = await accounts.signTransaction(transaction, process.env.PRIVATE_KEY);
+  const { rawTransaction: signed } = await account.signTransaction(transaction);
   console.log('signed', signed, signed.length);
 };
 

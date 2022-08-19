@@ -19,7 +19,7 @@ const main = async () => {
     nonce: 0, // provider.getTransactionCount(wallet.address)
     gasLimit: 21000,
     value: utils.parseEther('0.1'),
-    chainId: 43113,
+    chainId: 1,
     type: 2,
     maxPriorityFeePerGas: utils.parseUnits('1.5', 'gwei'), // provider.getFeeData()
     maxFeePerGas: utils.parseUnits('51.5', 'gwei'), // provider.getFeeData()
