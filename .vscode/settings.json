@@ -1,0 +1,8 @@
+{
+  "[typescript]": {
+    "editor.tabSize": 2
+  },
+  "prettier.printWidth": 120,
+  "prettier.trailingComma": "all",
+  "typescript.preferences.quoteStyle": "single"
+}

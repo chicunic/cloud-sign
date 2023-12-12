@@ -1,41 +1,43 @@
 {
   "name": "cloud-sign",
-  "version": "0.0.1",
-  "main": "app.js",
+  "version": "0.0.2",
+  "description": "Sign and verify by Google Cloud HSM",
   "repository": "git@github.com:chicunic/cloud-sign.git",
   "author": "chicunic",
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "scripts": {
-    "lint": "eslint ./",
-    "test": "mocha"
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+    "build": "tsc",
+    "test": "tsc && mocha --timeout 10000 dist/test/*.js"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "dependencies": {
-    "@ethersproject/hash": "^5.6.1",
-    "@google-cloud/kms": "^3.0.1",
-    "@metamask/eth-sig-util": "^4.0.1",
-    "asn1.js": "^5.4.1",
-    "bn.js": "^5.2.1",
-    "dotenv": "^16.0.1",
-    "eslint-plugin-mocha": "^10.1.0",
+    "@aws-crypto/crc32c": "^5.2.0",
+    "@google-cloud/kms": "^4.0.1",
+    "@metamask/eth-sig-util": "^7.0.1",
+    "@peculiar/asn1-ecc": "^2.3.8",
+    "@peculiar/asn1-schema": "^2.3.8",
+    "chai": "^4.3.10",
+    "dotenv": "^16.3.1",
     "eth-lib": "^0.1.29",
-    "ethereumjs-util": "^7.1.5",
-    "ethers": "^5.6.9",
-    "web3": "^1.7.5",
-    "web3-eth-accounts": "^1.7.5",
-    "web3-providers-http": "^1.7.5",
-    "web3-utils": "^1.7.5"
+    "ethers": "^6.9.0",
+    "web3-eth-accounts": "^4.1.0",
+    "web3-utils": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "^8.22.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "mocha": "^10.0.0"
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "mocha": "^10.2.0",
+    "prettier": "^3.1.1",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
   }
 }
