@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { TypedDataDomain, TypedDataField, ZeroAddress, verifyTypedData } from 'ethers';
-import { CloudWallet } from './CloudWallet';
+import { CloudWallet } from './CloudWallet.js';
 
 const wallet = new CloudWallet(process.env.VERSION_NAME as string);
 
@@ -24,6 +24,6 @@ const value: Record<string, any> = {
   const signed = await wallet.signTypedData(domain, types, value);
   console.log('signed', signed, signed.length);
 
-  const address = await verifyTypedData(domain, types, value, signed);
+  const address = verifyTypedData(domain, types, value, signed);
   console.log('address 1', address);
-})();
+})().catch(console.error);

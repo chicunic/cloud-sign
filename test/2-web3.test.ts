@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeAll } from 'vitest';
 import {
   SignTypedDataVersion,
   personalSign,
@@ -5,7 +6,6 @@ import {
   recoverTypedSignature,
   signTypedData,
 } from '@metamask/eth-sig-util';
-import { assert } from 'chai';
 import {
   FeeMarketEIP1559Transaction,
   TypedTransaction,
@@ -20,52 +20,51 @@ import { hexToBytes, toBigInt, toChecksumAddress, toWei } from 'web3-utils';
 describe('2. Test web3 signer', () => {
   const privateKey = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
   const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
+  const message = 'message';
   let account: Web3Account;
 
-  before(async () => {
+  beforeAll(() => {
     account = privateKeyToAccount(privateKey);
   });
 
-  it('2-1: create wallet', async () => {
-    assert.equal(address, account.address);
+  it('2-1: create wallet', () => {
+    expect(account.address).toBe(address);
   });
 
-  it('2-2: sign message', async () => {
-    const message = 'message';
+  it('2-2: sign message', () => {
     {
       const { signature: signed } = account.sign(message);
       const verified = recover(message, signed);
-      assert.equal(verified, address);
+      expect(verified).toBe(address);
     }
     {
       const { signature: signed } = sign(message, privateKey);
       const verified = recover(message, signed);
-      assert.equal(verified, address);
+      expect(verified).toBe(address);
     }
     {
       const signed = personalSign({ privateKey: Buffer.from(hexToBytes(privateKey)), data: message });
       const verified = toChecksumAddress(recoverPersonalSignature({ data: message, signature: signed }));
-      assert.equal(verified, address);
+      expect(verified).toBe(address);
     }
   });
 
   it('2-3: sign transaction', async () => {
     const transaction: TypedTransaction = FeeMarketEIP1559Transaction.fromTxData({
-      nonce: 0, // web3.eth.getTransactionCount(account.address)
+      nonce: 0,
       gasLimit: 21000,
       to: account.address,
       value: toBigInt(toWei('0.1', 'ether')),
       type: 2,
-
-      chainId: 1, // web3.eth.net.getId()
-      maxPriorityFeePerGas: toBigInt(toWei('1.5', 'gwei')), // provider.getFeeData()
-      maxFeePerGas: toBigInt(toWei('51.5', 'gwei')), // provider.getFeeData()
+      chainId: 1,
+      maxPriorityFeePerGas: toBigInt(toWei('1.5', 'gwei')),
+      maxFeePerGas: toBigInt(toWei('51.5', 'gwei')),
     });
     const { transactionHash: txid } = await signTransaction(transaction, account.privateKey);
-    assert.equal(txid, '0xb11a068e2c6583c3392974e1230d5935c5e8bfb55b1d16984a3ae13aae1d1202');
+    expect(txid).toBe('0xb11a068e2c6583c3392974e1230d5935c5e8bfb55b1d16984a3ae13aae1d1202');
   });
 
-  it('2-4: sign typed data', async () => {
+  it('2-4: sign typed data', () => {
     const domain = {
       name: 'name',
       version: '1.0.0',
@@ -96,6 +95,6 @@ describe('2. Test web3 signer', () => {
         version: SignTypedDataVersion.V4,
       }),
     );
-    assert.equal(verified, address);
+    expect(verified).toBe(address);
   });
 });

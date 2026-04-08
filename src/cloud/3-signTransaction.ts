@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { CloudWallet } from './CloudWallet';
+import { CloudWallet } from './CloudWallet.js';
 import { Transaction, TransactionRequest, parseEther, parseUnits } from 'ethers';
 
 const wallet = new CloudWallet(process.env.VERSION_NAME as string);
@@ -25,4 +25,4 @@ const wallet = new CloudWallet(process.env.VERSION_NAME as string);
 
   const { from } = Transaction.from(signed);
   console.log('address 1:', from);
-})();
+})().catch(console.error);

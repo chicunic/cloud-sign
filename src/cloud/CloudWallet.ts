@@ -20,7 +20,7 @@ import {
   resolveAddress,
   resolveProperties,
 } from 'ethers';
-import { cloudSign, cloudPublicKey } from './utils';
+import { cloudSign, cloudPublicKey } from './utils.js';
 
 export class CloudWallet extends BaseWallet {
   readonly versionName: string;
@@ -115,7 +115,9 @@ export class CloudWallet extends BaseWallet {
       return address;
     });
 
-    const signature = await this.sign(TypedDataEncoder.hash(populated.domain, types, populated.value));
+    const signature = await this.sign(
+      TypedDataEncoder.hash(populated.domain as Record<string, any>, types, populated.value as Record<string, any>),
+    );
     return signature.serialized;
   }
 }

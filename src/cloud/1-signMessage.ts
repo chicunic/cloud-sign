@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { verifyMessage } from 'ethers';
-import { CloudWallet } from './CloudWallet';
+import { CloudWallet } from './CloudWallet.js';
 
 const wallet = new CloudWallet(process.env.VERSION_NAME as string);
 const message: string = 'message';
@@ -12,6 +12,6 @@ const message: string = 'message';
   const signed = await wallet.signMessage(message);
   console.log('signed:', signed, signed.length);
 
-  const address = await verifyMessage(message, signed);
+  const address = verifyMessage(message, signed);
   console.log('address 1:', address);
-})();
+})().catch(console.error);

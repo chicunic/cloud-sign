@@ -22,7 +22,7 @@ const transaction: TypedTransaction = FeeMarketEIP1559Transaction.fromTxData({
   maxFeePerGas: toBigInt(toWei('51.5', 'gwei')), // provider.getFeeData()
 });
 
-(async function main(): Promise<void> {
+void (async function main(): Promise<void> {
   const account: Web3Account = privateKeyToAccount(process.env.PRIVATE_KEY as string);
   console.log('address:', account.address);
 
@@ -33,4 +33,4 @@ const transaction: TypedTransaction = FeeMarketEIP1559Transaction.fromTxData({
     process.env.PRIVATE_KEY as string,
   );
   console.log('signed:', signed, signed.length);
-})();
+})().catch(console.error);

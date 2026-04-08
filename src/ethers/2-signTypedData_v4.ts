@@ -16,7 +16,7 @@ const value: Record<string, any> = {
   tokenId: 1,
 };
 
-(async function main(): Promise<void> {
+void (async function main(): Promise<void> {
   console.log('address 0:', wallet.address);
 
   const signed = await wallet.signTypedData(domain, types, value);
@@ -24,4 +24,4 @@ const value: Record<string, any> = {
 
   const address = verifyTypedData(domain, types, value, signed);
   console.log('address 1:', address);
-})();
+})().catch(console.error);

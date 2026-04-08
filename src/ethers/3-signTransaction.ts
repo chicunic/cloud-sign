@@ -14,7 +14,7 @@ const transaction: TransactionRequest = {
   chainId: 1,
 };
 
-(async function main(): Promise<void> {
+void (async function main(): Promise<void> {
   console.log('address 0:', wallet.address);
   console.log('unsigned:', transaction);
 
@@ -23,4 +23,4 @@ const transaction: TransactionRequest = {
 
   const { from } = Transaction.from(signed);
   console.log('address 1:', from);
-})();
+})().catch(console.error);

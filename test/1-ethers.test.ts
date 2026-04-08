@@ -1,4 +1,4 @@
-import { assert } from 'chai';
+import { describe, it, expect, beforeAll } from 'vitest';
 import { Transaction, Wallet, ZeroAddress, parseEther, parseUnits, verifyMessage, verifyTypedData } from 'ethers';
 
 describe('1. Test ethers signer', () => {
@@ -6,19 +6,19 @@ describe('1. Test ethers signer', () => {
   const address = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
   let wallet: Wallet;
 
-  before(async () => {
+  beforeAll(() => {
     wallet = new Wallet(privateKey);
   });
 
-  it('1-1: create wallet', async () => {
-    assert.equal(address, wallet.address);
+  it('1-1: create wallet', () => {
+    expect(wallet.address).toBe(address);
   });
 
   it('1-2: sign message', async () => {
     const message = 'message';
     const signed = await wallet.signMessage(message);
-    const verified = await verifyMessage(message, signed);
-    assert.equal(verified, address);
+    const verified = verifyMessage(message, signed);
+    expect(verified).toBe(address);
   });
 
   it('1-3: sign transaction', async () => {
@@ -34,7 +34,7 @@ describe('1. Test ethers signer', () => {
     };
     const signed = await wallet.signTransaction(transaction);
     const { hash: txid } = Transaction.from(signed);
-    assert.equal(txid, '0xb11a068e2c6583c3392974e1230d5935c5e8bfb55b1d16984a3ae13aae1d1202');
+    expect(txid).toBe('0xb11a068e2c6583c3392974e1230d5935c5e8bfb55b1d16984a3ae13aae1d1202');
   });
 
   it('1-4: sign typed data', async () => {
@@ -51,7 +51,7 @@ describe('1. Test ethers signer', () => {
       tokenId: 1,
     };
     const signed = await wallet.signTypedData(domain, types, value);
-    const verified = await verifyTypedData(domain, types, value, signed);
-    assert.equal(verified, address);
+    const verified = verifyTypedData(domain, types, value, signed);
+    expect(verified).toBe(address);
   });
 });
